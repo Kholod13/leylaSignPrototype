@@ -56,6 +56,24 @@ export const GenStyles = StyleSheet.create({
     left: '-8%',
     opacity: 0.7,
     rotation: '-58.22deg',
-  }
-  // other blocks
+  },
+  // blocks "first page downloading"
+  title: {
+    
+  },
+  text: {
+    
+  },
+  block: {
+    
+  },
+  textBlock: {
+    
+  },
+  buttonLogin: {
+    
+  },
+  buttonRegister: {
+    
+  },
 });
