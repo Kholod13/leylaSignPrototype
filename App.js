@@ -7,15 +7,28 @@ import React, { useState } from 'react';
 const fonts = () => Font.loadAsync({
   'inter-regular': require('./assets/fonts/Inter_18pt-Regular.ttf'),
   'inter-light': require('./assets/fonts/Inter_18pt-Light.ttf'),
-  //bold
-  //medium
-  //italic
+  'inter-bold': require('./assets/fonts/Inter_18pt-Bold.ttf'),
+  'inter-medium': require('./assets/fonts/Inter_18pt-Medium.ttf'),
+  'inter-italic': require('./assets/fonts/Inter_18pt-Italic.ttf'),
+  'inter-semiBold': require('./assets/fonts/Inter_18pt-SemiBold.ttf'),
 });
 
 export default function App() {
-  return (
-    <MainStack />
-  );
+  const [font, setFont] = useState(false);
+  
+  if(font){
+    return (
+      <MainStack />
+    );
+  }else {
+    return (
+      <AppLoading
+      startAsync={fonts}
+      onFinish={() => setFont(true)}
+      onError={console.warn}
+      />
+    );
+  }
 }
 
 const styles = StyleSheet.create({

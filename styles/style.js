@@ -3,10 +3,11 @@ import { StyleSheet } from "react-native";
 export const GenStyles = StyleSheet.create({
     container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
+    padding: 20,
+    backgroundColor: '#F5F1EE',
     justifyContent: 'center',
     position: 'relative',
+    
   },
   // background circles
   circle1: {
@@ -59,21 +60,103 @@ export const GenStyles = StyleSheet.create({
   },
   // blocks "first page downloading"
   title: {
-    
+    fontFamily: 'inter-bold',
+    fontSize: 24,
+    textAlign: 'left',
+    marginBottom: 20,
+    marginTop: 20,
   },
   text: {
-    
+    fontFamily: 'inter-regular',
+    fontSize: 18,
+    marginBottom: 20,
   },
   block: {
-    
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    marginBottom: 10,
+    padding: 15,
+    borderRadius: 16,
+  },
+  blockInterests: {
+    padding: 10,
+    backgroundColor: 'white',
+    borderRadius: 16,
+    margin: 3,
+    paddingLeft: 15,
+    paddingRight: 15,
+    width: 'auto',
   },
   textBlock: {
-    
+    fontFamily: 'inter-regular',
+    fontSize: 18,
   },
   buttonLogin: {
-    
+    backgroundColor: '#FF9D00',
+    fontSize: 18,
+    width: '100%',
+    padding: 20,
+    borderRadius: 100,
+    borderColor: '#E27500',
+    borderTopWidth: 0, 
+    borderRightWidth: 1,
+    borderBottomWidth: 3,
+    borderLeftWidth: 1,
+  },
+  buttonLoginText: {
+    fontFamily: 'inter-bold',
+    fontSize: 18,
+    color: 'white',
+    textAlign: 'center',
   },
   buttonRegister: {
-    
+    backgroundColor: 'transparent',
+    fontSize: 18,
+    width: '100%',
+    padding: 20,
+    borderRadius: 100,
+    borderColor: '#FF9D00',
+    borderTopWidth: 1, 
+    borderRightWidth: 1,
+    borderBottomWidth: 3,
+    borderLeftWidth: 1,
+  },
+  buttonRegisterText: {
+    color: '#FF9D00',
+    textAlign: 'center',
+    fontFamily: 'inter-bold',
+    fontSize: 18,
+  },
+  buttonDisabled: {
+    backgroundColor: '#FFCD9D',
+    fontSize: 18,
+    width: '100%',
+    padding: 20,
+    borderRadius: 100,
+    borderColor: '#FFB472',
+    borderTopWidth: 0, 
+    borderRightWidth: 1,
+    borderBottomWidth: 3,
+    borderLeftWidth: 1,
+  },
+  languageLevels: {
+    fontSize: 22,
+    fontFamily: 'inter-semiBold',
+    color: '#E27500',
+    marginRight: 20,
+  },  
+  underTextBlock: {
+    fontFamily: 'inter-regular',
+    fontSize: 16,
+    color: '#716C69',
+  },
+  IconStyle: {
+    marginRight: 10,
+  },
+  containerInterests: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    width: '90%',
   },
 });

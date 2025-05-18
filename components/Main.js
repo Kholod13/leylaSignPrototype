@@ -1,9 +1,12 @@
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import { GenStyles } from '../styles/style';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Main() {
+    const navigation = useNavigation();
+
   return (
     <View style={GenStyles.container}>
         {/* background */}
@@ -24,27 +27,36 @@ export default function Main() {
             style={GenStyles.circle4}>
         </LinearGradient>
         {/* content */}
-        <Text style={GenStyles.title}>Hi!</Text>
-        <Text style={GenStyles.text}>We will help you learn the language. You will improve:</Text>
-        {/* blocks */}
-        <View>
-            <View style={GenStyles.block}>
-                <Image source={require('../assets/icons/Note.png')} />
+        <View style={{ flex: 1, justifyContent: 'flex-end' }}>
+            <View>
+            <Text style={GenStyles.title}>Hi!</Text>
+            <Text style={GenStyles.text}>We will help you learn the language. You will improve:</Text>
+
+            <View style={{ alignItems: 'flex-start', marginBottom: '35%' }}>
+                <View style={GenStyles.block}>
+                <Image style={GenStyles.IconStyle} source={require('../assets/icons/Note.png')} />
                 <Text style={GenStyles.textBlock}>Improve your vocabulary</Text>
-            </View>
-            <View style={GenStyles.block}>
-                <Image source={require('../assets/icons/Media.png')} />
+                </View>
+                <View style={GenStyles.block}>
+                <Image style={GenStyles.IconStyle} source={require('../assets/icons/Media.png')} />
                 <Text style={GenStyles.textBlock}>Understand complex texts</Text>
-            </View>
-            <View style={GenStyles.block}>
-                <Image source={require('../assets/icons/Facts.png')} />
+                </View>
+                <View style={GenStyles.block}>
+                <Image style={GenStyles.IconStyle} source={require('../assets/icons/Facts.png')} />
                 <Text style={GenStyles.textBlock}>Read interesting facts</Text>
+                </View>
             </View>
-        </View>
-        {/* buttons */}
-        <View>
-            <Button style={GenStyles.buttonLogin} title="Log In" onPress={() => {}} />
-            <Button style={GenStyles.buttonRegister} title="Sign Up" onPress={() => {}} />
+            </View>
+
+            {/* Кнопки внизу */}
+            <View style={{ gap: 10 }}>
+            <TouchableOpacity style={GenStyles.buttonLogin} onPress={() => navigation.navigate('Login')}>
+                <Text style={GenStyles.buttonLoginText}>Log In</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={GenStyles.buttonRegister} onPress={() => navigation.navigate('Register')}>
+                <Text style={GenStyles.buttonRegisterText}>Sign Up</Text>
+            </TouchableOpacity>
+            </View>
         </View>
     </View>
   );

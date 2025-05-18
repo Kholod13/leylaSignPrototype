@@ -5,38 +5,79 @@ import { NavigationContainer } from "@react-navigation/native";
 //components
 import Main from "./components/Main";   
 import Login from "./components/Login";
-import Register from "./components/Registration";
+import Register from "./components/register/Registration";
+import { ProgressProvider } from './components/ProgressContext';
+import RegistrationStep2 from "./components/register/RegistrationStep2";
+import RegistrationStep3 from "./components/register/RegistrationStep3";
+import RegistrationStep4 from "./components/register/RegistrationStep4";
+import RegistrationStep5 from "./components/register/RegistrationStep5";
 
 const Stack = createStackNavigator();
 
 export default function Navigate() {
-    return <NavigationContainer>
-        <Stack.Navigator>
-            <Stack.Screen
-                name="Main"
-                component={Main}
-                options={{
-                    title: 'Home',
-                    headerShown: false,
-                    //headerStyle: {backgroundColor: '#f4511e'},
-                    //headerTintColor: '#fff',
-                    //headerTitleStyle: {fontFamily: 'mt-light', fontSize: 22},
-                    }}
-            />
-            <Stack.Screen
-                name="Login"
-                component={Login}
-                options={{
-                    title: 'Login',
-                    }}
-            />
-            <Stack.Screen
-                name="Register"
-                component={Register}
-                options={{
-                    title: 'Register',
-                    }}
-            />
-        </Stack.Navigator>
-    </NavigationContainer>;
+    return <ProgressProvider>
+        <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen
+                    name="Main"
+                    component={Main}
+                    options={{
+                        title: 'Welcome',
+                        headerShown: false,
+                        //headerStyle: {backgroundColor: '#f4511e'},
+                        //headerTintColor: '#fff',
+                        //headerTitleStyle: {fontFamily: 'mt-light', fontSize: 22},
+                        }}
+                />
+                <Stack.Screen
+                    name="Login"
+                    component={Login}
+                    options={{
+                        title: 'Login',
+                        headerShown: false,
+                        }}
+                />
+                <Stack.Screen
+                    name="Register"
+                    component={Register}
+                    options={{
+                        title: 'Register',
+                        headerShown: false,
+                        }}
+                />
+                <Stack.Screen
+                    name="RegistrationStep2"
+                    component={RegistrationStep2}
+                    options={{
+                        title: 'Registration Step 2',
+                        headerShown: false,
+                        }}
+                />
+                <Stack.Screen
+                    name="RegistrationStep3"
+                    component={RegistrationStep3}
+                    options={{
+                        title: 'Registration Step 3',
+                        headerShown: false,
+                        }}
+                />
+                <Stack.Screen
+                    name="RegistrationStep4"
+                    component={RegistrationStep4}
+                    options={{
+                        title: 'Registration Step 4',
+                        headerShown: false,
+                        }}
+                />
+                <Stack.Screen
+                    name="RegistrationStep5"
+                    component={RegistrationStep5}
+                    options={{
+                        title: 'Registration Step 5',
+                        headerShown: false,
+                        }}
+                />
+            </Stack.Navigator>
+        </NavigationContainer>
+    </ProgressProvider>
 }
