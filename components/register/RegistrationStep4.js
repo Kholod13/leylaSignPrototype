@@ -71,7 +71,7 @@ export default function RegistrationStep4({ navigation }) {
       <View>
         <TouchableOpacity
           style={[
-            selectedLanguages > 0 ? GenStyles.buttonLogin : GenStyles.buttonDisabled, 
+            selectedLanguages.length > 0 ? GenStyles.buttonLogin : GenStyles.buttonDisabled, 
           ]}
           onPress={() => navigation.navigate('RegistrationStep5')}
           disabled={selectedLanguages.length === 0 }

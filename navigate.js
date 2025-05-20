@@ -11,6 +11,7 @@ import RegistrationStep2 from "./components/register/RegistrationStep2";
 import RegistrationStep3 from "./components/register/RegistrationStep3";
 import RegistrationStep4 from "./components/register/RegistrationStep4";
 import RegistrationStep5 from "./components/register/RegistrationStep5";
+import RegistrationStep6 from "./components/register/RegistrationStep6";
 
 const Stack = createStackNavigator();
 
@@ -74,6 +75,14 @@ export default function Navigate() {
                     component={RegistrationStep5}
                     options={{
                         title: 'Registration Step 5',
+                        headerShown: false,
+                        }}
+                />
+                <Stack.Screen
+                    name="RegistrationStep6"
+                    component={RegistrationStep6}
+                    options={{
+                        title: 'Registration Step 6',
                         headerShown: false,
                         }}
                 />
