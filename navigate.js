@@ -3,8 +3,9 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 //components
-import Main from "./components/Main";   
-import Login from "./components/Login";
+import Main from "./components/Main";
+import Onboarding from "./components/Onboarding";
+import Login from "./components/login/Login";
 import Register from "./components/register/Registration";
 import { ProgressProvider } from './components/ProgressContext';
 import RegistrationStep2 from "./components/register/RegistrationStep2";
@@ -20,8 +21,8 @@ export default function Navigate() {
         <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen
-                    name="Main"
-                    component={Main}
+                    name="Onboarding"
+                    component={Onboarding}
                     options={{
                         title: 'Welcome',
                         headerShown: false,
@@ -30,6 +31,7 @@ export default function Navigate() {
                         //headerTitleStyle: {fontFamily: 'mt-light', fontSize: 22},
                         }}
                 />
+                
                 <Stack.Screen
                     name="Login"
                     component={Login}
@@ -83,6 +85,14 @@ export default function Navigate() {
                     component={RegistrationStep6}
                     options={{
                         title: 'Registration Step 6',
+                        headerShown: false,
+                        }}
+                />
+                <Stack.Screen
+                    name="Main"
+                    component={Main}
+                    options={{
+                        title: 'Main',
                         headerShown: false,
                         }}
                 />

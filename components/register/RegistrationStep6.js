@@ -167,7 +167,7 @@ export default function RegistrationStep6({ navigation }) {
              style={[
                 isMailValid && !checkMail() ? GenStyles.buttonLogin : GenStyles.buttonDisabled,
               ]}
-              onPress={() => navigation.navigate('Login')}
+              onPress={() => navigation.navigate('Main')}
               disabled={!isMailValid || checkMail()}
 
         >
