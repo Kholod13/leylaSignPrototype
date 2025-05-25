@@ -13,6 +13,8 @@ import RegistrationStep3 from "./components/register/RegistrationStep3";
 import RegistrationStep4 from "./components/register/RegistrationStep4";
 import RegistrationStep5 from "./components/register/RegistrationStep5";
 import RegistrationStep6 from "./components/register/RegistrationStep6";
+import ForgotPassword from "./components/Forgot Password/ForgotPassword";
+import CheckMail from "./components/CheckMail";
 
 const Stack = createStackNavigator();
 
@@ -93,6 +95,22 @@ export default function Navigate() {
                     component={Main}
                     options={{
                         title: 'Main',
+                        headerShown: false,
+                        }}
+                />
+                <Stack.Screen
+                    name="ForgotPassword"
+                    component={ForgotPassword}
+                    options={{
+                        title: 'Forgot Password',
+                        headerShown: false,
+                        }}
+                />
+                <Stack.Screen
+                    name="CheckMail"
+                    component={CheckMail}
+                    options={{
+                        title: 'Check Mail',
                         headerShown: false,
                         }}
                 />

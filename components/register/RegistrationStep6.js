@@ -69,7 +69,7 @@ export default function RegistrationStep6({ navigation }) {
             style={GenStyles.circlePassPage2}>
         </LinearGradient>
       {/* content */}
-      <View style={{ height: '90%' }}>
+      <View style={{ height: '82%' }}>
         <ProgressBarHeader />
         <Text style={GenStyles.title}>Create an account</Text>
         <View style={{position: 'relative'}}>
@@ -151,18 +151,18 @@ export default function RegistrationStep6({ navigation }) {
             {confirmPassword.length > 0 && confirmPassword !== password && (
                 <Text style={GenStyles.textError}>Passwords don't match</Text>
               )}
-              {/* TEXT LOGIN */}
-              <View style={{ position: 'absolute', bottom: '-270', width: '100%', alignItems: 'center'}}>
-                <View>
-                    <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                        <Text style={{fontFamily: 'inter-semiBold', fontSize: 16}}>I have an account  <Text style={{color: '#0388F5'}}>Log in</Text></Text>
-                    </TouchableOpacity>
-                </View>
-              </View>
         </View>
       </View>
 
-      <View>
+      <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center' }}>
+        {/* TEXT LOGIN */}
+        <View>
+          <View style={{flexDirection: 'row', justifyContent: 'center', marginBottom: 40}}> 
+            <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+              <Text style={{fontFamily: 'inter-semiBold', fontSize: 16}}>I have an account  <Text style={{color: '#0388F5'}}>Log in</Text></Text>
+            </TouchableOpacity>
+          </View>
+        </View>
         <TouchableOpacity
              style={[
                 isMailValid && !checkMail() ? GenStyles.buttonLogin : GenStyles.buttonDisabled,

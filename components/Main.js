@@ -10,8 +10,8 @@ export default function Main() {
   return (
     <View style={GenStyles.container}>
         <View style={{ gap: 10 }}>
-            <TouchableOpacity style={GenStyles.buttonLogin} onPress={() => navigation.navigate('Login')}>
-                <Text style={GenStyles.buttonLoginText}>Log In</Text>
+            <TouchableOpacity style={GenStyles.buttonLogin} onPress={() => navigation.navigate('Onboarding')}>
+                <Text style={GenStyles.buttonLoginText}>Start</Text>
             </TouchableOpacity>
         </View>
     </View>

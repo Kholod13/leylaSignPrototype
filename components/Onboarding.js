@@ -49,7 +49,7 @@ export default function Onboarding() {
             </View>
 
             {/* Кнопки внизу */}
-            <View style={{ gap: 10 }}>
+            <View style={{  }}>
             <TouchableOpacity style={GenStyles.buttonLogin} onPress={() => navigation.navigate('Login')}>
                 <Text style={GenStyles.buttonLoginText}>Log In</Text>
             </TouchableOpacity>
