@@ -4,6 +4,8 @@ import ProgressBarHeader from '../ProgressBarHeader';
 import React, { useContext, useEffect, useState } from 'react';
 import { ProgressContext } from '../ProgressContext';
 import { LinearGradient } from 'expo-linear-gradient';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { AuthContext } from '../../AuthContext';
 
 const users = [
   { key: '1', label: 'leyla@gmail.com', password: '123456gG' },
@@ -11,6 +13,8 @@ const users = [
 ];
 
 export default function Login({ navigation }) {
+  const { login } = useContext(AuthContext);
+
   const { setProgress } = useContext(ProgressContext);
   const [emailFocused, setEmailFocused] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
@@ -129,11 +133,11 @@ export default function Login({ navigation }) {
              style={[
                 checkMail() && checkPassword() ? GenStyles.buttonLogin : GenStyles.buttonDisabled,
               ]}
-              onPress={() => navigation.navigate('Main')}
+              onPress={login}
               disabled={!(checkMail() && checkPassword())}
 
         >
-          <Text style={GenStyles.buttonLoginText}>Sign up</Text>
+          <Text style={GenStyles.buttonLoginText}>Log In</Text>
         </TouchableOpacity>
       </View>
     </View>

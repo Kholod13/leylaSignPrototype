@@ -15,82 +15,20 @@ import RegistrationStep5 from "./components/register/RegistrationStep5";
 import RegistrationStep6 from "./components/register/RegistrationStep6";
 import ForgotPassword from "./components/Forgot Password/ForgotPassword";
 import CheckMail from "./components/CheckMail";
+import { AuthContext } from "./AuthContext";
+import { useContext } from "react";
 
 const Stack = createStackNavigator();
 
 export default function Navigate() {
+    const { isLoggedIn } = useContext(AuthContext);
+    if (isLoggedIn === null) return null; // ждём загрузку токена
+
     return <ProgressProvider>
         <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen
-                    name="Onboarding"
-                    component={Onboarding}
-                    options={{
-                        title: 'Welcome',
-                        headerShown: false,
-                        //headerStyle: {backgroundColor: '#f4511e'},
-                        //headerTintColor: '#fff',
-                        //headerTitleStyle: {fontFamily: 'mt-light', fontSize: 22},
-                        }}
-                />
-                
-                <Stack.Screen
-                    name="Login"
-                    component={Login}
-                    options={{
-                        title: 'Login',
-                        headerShown: false,
-                        }}
-                />
-                <Stack.Screen
-                    name="Register"
-                    component={Register}
-                    options={{
-                        title: 'Register',
-                        headerShown: false,
-                        }}
-                />
-                <Stack.Screen
-                    name="RegistrationStep2"
-                    component={RegistrationStep2}
-                    options={{
-                        title: 'Registration Step 2',
-                        headerShown: false,
-                        }}
-                />
-                <Stack.Screen
-                    name="RegistrationStep3"
-                    component={RegistrationStep3}
-                    options={{
-                        title: 'Registration Step 3',
-                        headerShown: false,
-                        }}
-                />
-                <Stack.Screen
-                    name="RegistrationStep4"
-                    component={RegistrationStep4}
-                    options={{
-                        title: 'Registration Step 4',
-                        headerShown: false,
-                        }}
-                />
-                <Stack.Screen
-                    name="RegistrationStep5"
-                    component={RegistrationStep5}
-                    options={{
-                        title: 'Registration Step 5',
-                        headerShown: false,
-                        }}
-                />
-                <Stack.Screen
-                    name="RegistrationStep6"
-                    component={RegistrationStep6}
-                    options={{
-                        title: 'Registration Step 6',
-                        headerShown: false,
-                        }}
-                />
-                <Stack.Screen
+            <Stack.Navigator screenOptions={{ headerShown: false}}>
+                {isLoggedIn ? (
+                    <Stack.Screen
                     name="Main"
                     component={Main}
                     options={{
@@ -98,22 +36,93 @@ export default function Navigate() {
                         headerShown: false,
                         }}
                 />
-                <Stack.Screen
-                    name="ForgotPassword"
-                    component={ForgotPassword}
-                    options={{
-                        title: 'Forgot Password',
-                        headerShown: false,
-                        }}
-                />
-                <Stack.Screen
-                    name="CheckMail"
-                    component={CheckMail}
-                    options={{
-                        title: 'Check Mail',
-                        headerShown: false,
-                        }}
-                />
+                ) : (
+                    <>
+                        <Stack.Screen
+                            name="Onboarding"
+                            component={Onboarding}
+                            options={{
+                                title: 'Welcome',
+                                headerShown: false,
+                                //headerStyle: {backgroundColor: '#f4511e'},
+                                //headerTintColor: '#fff',
+                                //headerTitleStyle: {fontFamily: 'mt-light', fontSize: 22},
+                                }}
+                        />
+                        <Stack.Screen
+                            name="Login"
+                            component={Login}
+                            options={{
+                                title: 'Login',
+                                headerShown: false,
+                                }}
+                        />
+                        <Stack.Screen
+                            name="Register"
+                            component={Register}
+                            options={{
+                                title: 'Register',
+                                headerShown: false,
+                                }}
+                        />
+                        <Stack.Screen
+                            name="RegistrationStep2"
+                            component={RegistrationStep2}
+                            options={{
+                                title: 'Registration Step 2',
+                                headerShown: false,
+                                }}
+                        />
+                        <Stack.Screen
+                            name="RegistrationStep3"
+                            component={RegistrationStep3}
+                            options={{
+                                title: 'Registration Step 3',
+                                headerShown: false,
+                                }}
+                        />
+                        <Stack.Screen
+                            name="RegistrationStep4"
+                            component={RegistrationStep4}
+                            options={{
+                                title: 'Registration Step 4',
+                                headerShown: false,
+                                }}
+                        />
+                        <Stack.Screen
+                            name="RegistrationStep5"
+                            component={RegistrationStep5}
+                            options={{
+                                title: 'Registration Step 5',
+                                headerShown: false,
+                                }}
+                        />
+                        <Stack.Screen
+                            name="RegistrationStep6"
+                            component={RegistrationStep6}
+                            options={{
+                                title: 'Registration Step 6',
+                                headerShown: false,
+                                }}
+                        />
+                        <Stack.Screen
+                            name="ForgotPassword"
+                            component={ForgotPassword}
+                            options={{
+                                title: 'Forgot Password',
+                                headerShown: false,
+                                }}
+                        />
+                        <Stack.Screen
+                            name="CheckMail"
+                            component={CheckMail}
+                            options={{
+                                title: 'Check Mail',
+                                headerShown: false,
+                                }}
+                        />
+                    </>
+                )}
             </Stack.Navigator>
         </NavigationContainer>
     </ProgressProvider>

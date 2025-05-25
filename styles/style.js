@@ -1,13 +1,27 @@
 import { StyleSheet } from "react-native";
 
 export const GenStyles = StyleSheet.create({
-    container: {
+  container: {
     flex: 1,
     padding: 20,
     backgroundColor: '#F5F1EE',
     justifyContent: 'center',
     position: 'relative',
-    
+  },
+  containerLoggedIn: {
+    flex: 1,
+    backgroundColor: '#F5F1EE',
+    justifyContent: 'flex-start',
+    position: 'relative',
+  },
+  containerContent: {
+    height: '87%',
+    paddingTop: 20,
+  },
+  containerFooter: {
+    height: '10%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   // background circles
   circle1: {

@@ -3,6 +3,10 @@ import MainStack from './navigate';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import React, { useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Navigation from './navigate';
+import { useEffect } from 'react';
+import { AuthProvider } from './AuthContext';
 
 const fonts = () => Font.loadAsync({
   'inter-regular': require('./assets/fonts/Inter_18pt-Regular.ttf'),
@@ -14,21 +18,25 @@ const fonts = () => Font.loadAsync({
 });
 
 export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [font, setFont] = useState(false);
+  const [fontLoaded, setFontLoaded] = React.useState(false);
   
-  if(font){
-    return (
-      <MainStack />
-    );
-  }else {
+  if(!fontLoaded) {
     return (
       <AppLoading
-      startAsync={fonts}
-      onFinish={() => setFont(true)}
-      onError={console.warn}
+        startAsync={fonts}
+        onFinish={() => setFontLoaded(true)}
+        onError={console.warn}
       />
     );
   }
+  
+  return (
+    <AuthProvider>
+      <Navigation />
+    </AuthProvider>
+  );
 }
 
 const styles = StyleSheet.create({
