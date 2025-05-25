@@ -8,6 +8,7 @@ export const GenStyles = StyleSheet.create({
     justifyContent: 'center',
     position: 'relative',
   },
+  // main
   containerLoggedIn: {
     flex: 1,
     backgroundColor: '#F5F1EE',
@@ -20,8 +21,13 @@ export const GenStyles = StyleSheet.create({
   },
   containerFooter: {
     height: '10%',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'center',
+    borderTopWidth: 1,
+    borderColor: '#E5E0DC',
+    borderRadius: 16,
+    flexDirection: 'row',
+    
   },
   // background circles
   circle1: {
