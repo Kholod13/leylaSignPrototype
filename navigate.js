@@ -4,6 +4,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 //components
 import Main from "./components/Main";
+import Folders from "./components/Folders";
+import Simulator from "./components/Simulator";
+import Profile from "./components/Profile";
 import Onboarding from "./components/Onboarding";
 import Login from "./components/login/Login";
 import Register from "./components/register/Registration";
@@ -28,14 +31,44 @@ export default function Navigate() {
         <NavigationContainer>
             <Stack.Navigator screenOptions={{ headerShown: false}}>
                 {isLoggedIn ? (
+                    <>
                     <Stack.Screen
-                    name="Main"
-                    component={Main}
-                    options={{
-                        title: 'Main',
-                        headerShown: false,
+                        name="Main"
+                        component={Main}
+                        options={{
+                            title: 'Main',
+                            headerShown: false,
+                            animation: 'none',
+                            }}
+                    />
+                    <Stack.Screen
+                        name="Folders"
+                        component={Folders}
+                        options={{
+                            title: 'Folders',
+                            headerShown: false,
+                            animation: 'none',
                         }}
-                />
+                    />
+                    <Stack.Screen
+                            name="Simulator"
+                            component={Simulator}
+                            options={{
+                                title: 'Simulator',
+                                headerShown: false,
+                                animation: 'none',
+                            }}
+                    />
+                    <Stack.Screen
+                            name="Profile"
+                            component={Profile}
+                            options={{
+                                title: 'Profile',
+                                headerShown: false,
+                                animation: 'none',
+                                }}
+                    />
+                    </>
                 ) : (
                     <>
                         <Stack.Screen
