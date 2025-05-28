@@ -38,7 +38,7 @@ export default function Navigate() {
                         options={{
                             title: 'Main',
                             headerShown: false,
-                            animation: 'none',
+                            animation: 'fade'
                             }}
                     />
                     <Stack.Screen
@@ -47,7 +47,7 @@ export default function Navigate() {
                         options={{
                             title: 'Folders',
                             headerShown: false,
-                            animation: 'none',
+                            animation: 'fade',
                         }}
                     />
                     <Stack.Screen
@@ -56,7 +56,7 @@ export default function Navigate() {
                             options={{
                                 title: 'Simulator',
                                 headerShown: false,
-                                animation: 'none',
+                                animation: 'fade',
                             }}
                     />
                     <Stack.Screen
@@ -65,7 +65,7 @@ export default function Navigate() {
                             options={{
                                 title: 'Profile',
                                 headerShown: false,
-                                animation: 'none',
+                                animation: 'fade',
                                 }}
                     />
                     </>

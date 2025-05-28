@@ -403,4 +403,10 @@ export const GenStyles = StyleSheet.create({
     right: -80,
     opacity: 0.7,
   },
+  imageShow: {
+    width: '80%',
+    height: 200,
+    borderRadius: 16,
+    margin: 20,
+  }
 });

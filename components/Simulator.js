@@ -9,7 +9,10 @@ export default function Simulator() {
   return (
     <View style={GenStyles.containerLoggedIn}>
         <View style={GenStyles.containerContent}>
-            <Text style={GenStyles.title}>MAIN CONTAINER</Text>
+            <Text style={GenStyles.title}>SIMULATOR CONTAINER</Text>
+            <Image
+                style={GenStyles.imageShow}
+                source={require('../assets/images/test2.png')}/>
         </View>
         <NavigationMenu />
     </View>

@@ -25,7 +25,7 @@ export default function RegistrationStep3({ navigation }) {
     <View style={GenStyles.container}>
       <View style={{ height: '90%' }}>
         <ProgressBarHeader />
-        <Text style={GenStyles.title}>Choose your English level</Text>
+        <Text style={GenStyles.title}>Choose your language level</Text>
         <View style={{ height: '82%' }}>
           <ScrollView showsVerticalScrollIndicator={false}>
             {languages.map((lang) => (

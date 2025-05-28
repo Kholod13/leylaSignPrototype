@@ -124,7 +124,7 @@ export default function Login({ navigation }) {
         {/* TEXT LOGIN */}
         <View>
           <View style={{flexDirection: 'row', justifyContent: 'center', marginBottom: 40}}> 
-            <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+            <TouchableOpacity onPress={() => navigation.navigate('Register')}>
               <Text style={{fontFamily: 'inter-semiBold', fontSize: 16}}>Don't have an account  <Text style={{color: '#0388F5'}}>Sign Up</Text></Text>
             </TouchableOpacity>
           </View>
