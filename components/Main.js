@@ -3,31 +3,7 @@ import { GenStyles } from '../styles/style';
 import { useNavigation } from '@react-navigation/native';
 import NavigationMenu from './NavigationMenu';
 import React, { useState } from 'react';
-
-const translateWord = async (word) => {
-  try {
-    const response = await fetch('https://libretranslate.de/translate', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        q: word,
-        source: 'en',
-        target: 'uk',
-        format: 'text',
-      }),
-    });
-
-    if (!response.ok) throw new Error('HTTP error ' + response.status);
-
-    const data = await response.json();
-    return data.translatedText || '? Переклад не знайдено';
-  } catch (error) {
-    console.error('Помилка перекладу:', error);
-    return '❌ Помилка перекладу';
-  }
-};
+import { translateWord } from './api/translateWord';
 
 export default function Main() {
   const fullText = 'A dog is a loyal and intelligent animal that has been a companion to humans for thousands of years. Dogs come in many breeds, each with unique characteristics, sizes, and temperaments. Some dogs are small and energetic, while others are large and calm. They are often trained to perform various tasks, such as guarding homes, assisting people with disabilities, or working in law enforcement.\n\nDogs communicate through barking, body language, and facial expressions. They are social animals that form strong bonds with their owners and families. Proper care, including regular exercise, a balanced diet, and veterinary check-ups, is essential for keeping a dog healthy and happy.\n\nMany people enjoy having dogs as pets because of their affectionate nature and loyal companionship. Dogs playful are known for forming strong bonds with their owners, often providing emotional support and a sense of security. Their playful';
