@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Modal, TouchableOpacity, Animated } from 'react-native';
+import { StyleSheet, Text, View, Modal, TouchableOpacity, Animated, Image } from 'react-native';
 import { GenStyles } from '../styles/style';
 import { useNavigation } from '@react-navigation/native';
 import NavigationMenu from './NavigationMenu';
@@ -71,6 +71,11 @@ Some say that if you listen closely near the old oak on a quiet night, you’ll 
   }
 };
 
+const formatText = (text) => {
+  if (!text) return '';
+  const cleaned = text.replace(/[^\p{L}\p{N}\s]/gu, ''); // удаление всех символов кроме букв/цифр/пробелов
+  return cleaned.charAt(0).toUpperCase() + cleaned.slice(1).toLowerCase();
+};
 
   const words = fullText.split(/(\s+)/); // save spaces
 
@@ -126,13 +131,21 @@ Some say that if you listen closely near the old oak on a quiet night, you’ll 
             onRequestClose={() => setModalVisible(false)}
           >
             <View style={styles.modalOverlay}>
+              {/* Закрытие по нажатию на фон */}
+              <TouchableOpacity
+                style={StyleSheet.absoluteFill}
+                activeOpacity={1}
+                onPress={() => setModalVisible(false)}
+              />
+              
               <View style={styles.modalContent}>
-                {/* button */}<Text>BUTTON</Text>
-                <Text style={styles.wordTitle}>{selectedWord}</Text>
-                <Text style={styles.translation}>{translation}</Text>
-                <TouchableOpacity onPress={() => setModalVisible(false)}>
-                  <Text style={styles.closeButton}>Close</Text>
-                </TouchableOpacity>
+                <View style={styles.buttonAdd}>
+                  <TouchableOpacity onPress='AddWordToFolder'>
+                    <Image source={require('../assets/icons/PlusCircle.png')} />
+                  </TouchableOpacity>
+                </View>
+                <Text style={styles.wordTitle}>{formatText(selectedWord)}</Text>
+                <Text style={styles.translation}>{formatText(translation)}</Text>
               </View>
             </View>
           </Modal>
@@ -188,28 +201,29 @@ container: {
   },
   modalOverlay: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.4)',
+    backgroundColor: 'rgba(0,0,0,0.1)',
     justifyContent: 'center',
     alignItems: 'center',
   },
   modalContent: {
     backgroundColor: 'white',
-    padding: 24,
-    borderRadius: 8,
+    padding: 16,
+    borderRadius: 16,
     width: '80%',
     alignItems: 'center',
+    paddingBottom: 50,
   },
   wordTitle: {
     fontSize: 20,
     fontWeight: 'bold',
   },
   translation: {
-    fontSize: 16,
+    fontSize: 18,
     marginVertical: 12,
   },
-  closeButton: {
-    color: '#0388F5',
-    marginTop: 10,
-    fontSize: 16,
+  buttonAdd: {
+    marginBottom: 20,
+    width: '100%',
+    alignItems: 'flex-end',
   },
 });
