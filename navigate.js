@@ -20,6 +20,7 @@ import ForgotPassword from "./components/Forgot Password/ForgotPassword";
 import CheckMail from "./components/CheckMail";
 import { AuthContext } from "./AuthContext";
 import { useContext } from "react";
+import AddWordToFolder from "./components/DialogWindows/AddWordToFolder";
 
 const Stack = createStackNavigator();
 
@@ -66,7 +67,16 @@ export default function Navigate() {
                                 title: 'Profile',
                                 headerShown: false,
                                 animation: 'fade',
-                                }}
+                            }}
+                    />
+                    <Stack.Screen
+                            name="AddWordToFolder"
+                            component={AddWordToFolder}
+                            options={{
+                                title: 'AddWordToFolder',
+                                headerShown: false,
+                                animation: 'fade',
+                            }}
                     />
                     </>
                 ) : (
