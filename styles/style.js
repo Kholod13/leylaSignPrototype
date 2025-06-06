@@ -408,5 +408,11 @@ export const GenStyles = StyleSheet.create({
     height: 200,
     borderRadius: 16,
     margin: 20,
+  },
+  buttonAddWord: {
+
+  },
+  buttonAddWordAfter: {
+    
   }
 });
