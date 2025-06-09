@@ -3,9 +3,19 @@ import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import { GenStyles } from '../styles/style';
 import { useNavigation } from '@react-navigation/native';
+import { clearTempUserData, showUserData } from './register/TempRegistrationData';
+import { useFocusEffect } from '@react-navigation/native';
+ // Clear temporary user data on onboarding screen load
 
 export default function Onboarding() {
     const navigation = useNavigation();
+
+    useFocusEffect(
+        React.useCallback(() => {
+            clearTempUserData();
+            showUserData();
+        }, [])
+    );
 
   return (
     <View style={GenStyles.container}>

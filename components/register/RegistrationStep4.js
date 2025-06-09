@@ -3,6 +3,7 @@ import { GenStyles } from '../../styles/style';
 import ProgressBarHeader from '../ProgressBarHeader';
 import React, { useContext, useEffect, useState } from 'react';
 import { ProgressContext } from '../ProgressContext';
+import { setInterests } from './TempRegistrationData';
 
 const languages = [
   { key: '1', label: 'Fashion'},
@@ -52,11 +53,22 @@ export default function RegistrationStep4({ navigation }) {
                   selectedLanguages.includes(lang.key) && styles.selectedBlockBorder,
                 ]}
                 onPress={() => {
-                if (selectedLanguages.includes(lang.key)) {
-                    setSelectedLanguages(selectedLanguages.filter(id => id !== lang.key));
-                } else {
-                    setSelectedLanguages([...selectedLanguages, lang.key]);
-                }
+                  let updatedSelection;
+
+                  if (selectedLanguages.includes(lang.key)) {
+                    updatedSelection = selectedLanguages.filter(id => id !== lang.key);
+                  } else {
+                    updatedSelection = [...selectedLanguages, lang.key];
+                  }
+
+                  setSelectedLanguages(updatedSelection);
+
+                  // Преобразуем ключи в названия
+                  const selectedLabels = languages
+                    .filter(item => updatedSelection.includes(item.key))
+                    .map(item => item.label);
+
+                  setInterests(selectedLabels); // сохраняем читаемые интересы
                 }}
               >
                 

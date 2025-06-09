@@ -3,6 +3,7 @@ import { GenStyles } from '../../styles/style';
 import ProgressBarHeader from '../ProgressBarHeader';
 import React, { useContext, useEffect, useState } from 'react';
 import { ProgressContext } from '../ProgressContext';
+import { setLevelLanguage } from './TempRegistrationData';
 
 const languages = [
   { key: 'A1', label: 'Beginner', underLabel: 'I can say hello' },
@@ -36,7 +37,10 @@ export default function RegistrationStep3({ navigation }) {
                   styles.radioContainer,
                   selectedLanguage === lang.key && styles.selectedBlockBorder,
                 ]}
-                onPress={() => setSelectedLanguage(lang.key)}
+              onPress={() => {
+                setSelectedLanguage(lang.key);
+                setLevelLanguage(lang.key);
+              }}
               >
                 <View>
                   <Text style={GenStyles.languageLevels}>{lang.key}</Text>

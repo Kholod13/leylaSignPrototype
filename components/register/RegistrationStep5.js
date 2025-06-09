@@ -4,12 +4,10 @@ import ProgressBarHeader from '../ProgressBarHeader';
 import React, { useContext, useEffect, useState } from 'react';
 import { ProgressContext } from '../ProgressContext';
 import { LinearGradient } from 'expo-linear-gradient';
+import { setUsernameTemp } from './TempRegistrationData';
+import { usernameList } from '../Data'; // Assuming names is exported from Data.js
 
-const names = [
-  { key: '1', label: 'Vlad'},
-  { key: '2', label: 'Rita'},
-  { key: '3', label: 'Leyla'},
-];
+const names = usernameList;
 
 export default function RegistrationStep5({ navigation }) {
   const { setProgress } = useContext(ProgressContext);
@@ -71,7 +69,10 @@ export default function RegistrationStep5({ navigation }) {
              style={[
                 isUsernameValid && !checkUsername() ? GenStyles.buttonLogin : GenStyles.buttonDisabled,
               ]}
-              onPress={() => navigation.navigate('RegistrationStep6')}
+              onPress={() => {
+                navigation.navigate('RegistrationStep6');
+                setUsernameTemp(username);
+              }}
               disabled={!isUsernameValid || checkUsername()}
 
         >

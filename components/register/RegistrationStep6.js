@@ -4,11 +4,11 @@ import ProgressBarHeader from '../ProgressBarHeader';
 import React, { useContext, useEffect, useState } from 'react';
 import { ProgressContext } from '../ProgressContext';
 import { LinearGradient } from 'expo-linear-gradient';
+import { setPasswordTemp, setEmailTemp, pushTempUserData } from './TempRegistrationData';
+import { mailsList } from '../Data'; // Assuming mails is exported from Data.js
+import { AuthContext } from '../../AuthContext';
 
-const mails = [
-  { key: '1', label: 'leyla@gmail.com'},
-  { key: '2', label: 'admin@gmail.com'},
-];
+const mails = mailsList;
 
 export default function RegistrationStep6({ navigation }) {
   const { setProgress } = useContext(ProgressContext);
@@ -18,6 +18,7 @@ export default function RegistrationStep6({ navigation }) {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+  const { login } = useContext(AuthContext);
 
   const [mail, setMail] = useState('');
   const [password, setPassword] = useState('');
@@ -167,7 +168,12 @@ export default function RegistrationStep6({ navigation }) {
              style={[
                 isMailValid && !checkMail() ? GenStyles.buttonLogin : GenStyles.buttonDisabled,
               ]}
-              onPress={() => navigation.navigate('Main')}
+              onPress={() => {
+                setEmailTemp(mail);
+                setPasswordTemp(password);
+                pushTempUserData();
+                login();
+              }}
               disabled={!isMailValid || checkMail()}
 
         >

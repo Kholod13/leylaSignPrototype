@@ -7,8 +7,11 @@ import { translateWord } from './api/translateWord';
 import { ScrollView } from 'react-native-gesture-handler';
 import { FlatList, Dimensions } from 'react-native';
 import { useWindowDimensions } from 'react-native';
+import { userNameList } from './Data';
 
 const {width} = Dimensions.get('window');
+
+userNameList(); // Initialize user names
 
 const paginateText = (text, firstPageLimit = 900, otherPagesLimit = 1200) => {
   const paragraphs = text.split('\n').map(p => p.trim()).filter(p => p.length > 0);

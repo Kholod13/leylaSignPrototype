@@ -3,6 +3,7 @@ import { GenStyles } from '../../styles/style';
 import ProgressBarHeader from '../ProgressBarHeader';
 import React, { useContext, useEffect, useState } from 'react';
 import { ProgressContext } from '../ProgressContext';
+import { setLearnedLanguage } from './TempRegistrationData';
 
 const languages = [
   { key: 'en_us', label: 'English (United State)', icon: require('../../assets/icons/USA.png') },
@@ -40,7 +41,10 @@ export default function RegistrationStep2({ navigation }) {
                   styles.radioContainer,
                   selectedLanguage === lang.key && styles.selectedBlockBorder,
                 ]}
-                onPress={() => setSelectedLanguage(lang.key)}
+                onPress={() => {
+                  setSelectedLanguage(lang.key);
+                  setLearnedLanguage(lang.key);
+                }}
               >
                 <Image style={GenStyles.IconStyle} source={lang.icon} />
                 <Text style={GenStyles.textBlock}>{lang.label}</Text>
