@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Navigation from './navigate';
 import { useEffect } from 'react';
 import { AuthProvider } from './AuthContext';
+import { UserProvider, userProvider } from './components/UserContext';
 
 const fonts = () => Font.loadAsync({
   'inter-regular': require('./assets/fonts/Inter_18pt-Regular.ttf'),
@@ -34,7 +35,9 @@ export default function App() {
   
   return (
     <AuthProvider>
-      <Navigation />
+      <UserProvider>
+        <Navigation />
+      </UserProvider>
     </AuthProvider>
   );
 }

@@ -6,11 +6,9 @@ import { ProgressContext } from '../ProgressContext';
 import { LinearGradient } from 'expo-linear-gradient';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AuthContext } from '../../AuthContext';
+import { usersList } from '../Data'; // Assuming userList is exported from Data.js
 
-const users = [
-  { key: '1', label: 'leyla@gmail.com', password: '123456gG' },
-  { key: '2', label: 'admin@gmail.com', password: '123456gG' },
-];
+const users = usersList;
 
 export default function Login({ navigation }) {
   const { login } = useContext(AuthContext);
@@ -27,11 +25,11 @@ export default function Login({ navigation }) {
   const [password, setPassword] = useState('');
   const isMailValid = mail.trim().length > 0;
   const isPasswordValid = password.trim().length > 0;
-  const userKey = users.find(user => user.label === mail)?.key;
+  const userKey = users.find(user => user.email === mail)?.key;
 
   function checkMail() {
   for (let i = 0; i < users.length; i++) {
-    if (users[i].label === mail) {
+    if (users[i].email === mail) {
       return true; // Email already exists
     }
   }
@@ -39,7 +37,7 @@ export default function Login({ navigation }) {
 }
 
   function checkPassword() {
-    const user = users.find(user => user.label === mail);
+    const user = users.find(user => user.email === mail);
     return user ? user.password === password : false;
   }
 

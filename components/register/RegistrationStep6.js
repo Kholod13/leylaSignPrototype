@@ -4,13 +4,16 @@ import ProgressBarHeader from '../ProgressBarHeader';
 import React, { useContext, useEffect, useState } from 'react';
 import { ProgressContext } from '../ProgressContext';
 import { LinearGradient } from 'expo-linear-gradient';
-import { setPasswordTemp, setEmailTemp, pushTempUserData } from './TempRegistrationData';
+import { setPasswordTemp, setEmailTemp, pushTempUserData, setNativeLanguage } from './TempRegistrationData';
 import { mailsList } from '../Data'; // Assuming mails is exported from Data.js
 import { AuthContext } from '../../AuthContext';
+import { useUsers } from '../UserContext';
+import { tempUserData } from './TempRegistrationData';
 
 const mails = mailsList;
 
 export default function RegistrationStep6({ navigation }) {
+  const { addUser } = useUsers();
   const { setProgress } = useContext(ProgressContext);
   const [emailFocused, setEmailFocused] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
@@ -172,6 +175,14 @@ export default function RegistrationStep6({ navigation }) {
                 setEmailTemp(mail);
                 setPasswordTemp(password);
                 pushTempUserData();
+                addUser({
+                  email: mail,
+                  password: password,
+                  nativeLanguage: tempUserData.nativeLanguage,
+                  learnedLanguage: tempUserData.learnedLanguage,
+                  levelLanguage: tempUserData.levelLanguage,
+                  interests: tempUserData.interests,
+                });
                 login();
               }}
               disabled={!isMailValid || checkMail()}

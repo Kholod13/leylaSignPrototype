@@ -13,7 +13,6 @@ export default function Onboarding() {
     useFocusEffect(
         React.useCallback(() => {
             clearTempUserData();
-            showUserData();
         }, [])
     );
 

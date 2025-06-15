@@ -11,12 +11,13 @@ export const mailsList = [
   { key: '2', label: 'admin@gmail.com'},
 ];
 
-export const usersList = [
-
+export const usersList = [ 
+  { key: '1', email: 'leyla@gmail.com', interests: ['art', 'music'], learnedLanguage: 'fr', nativeLanguage: 'ru', levelLanguage: 'A1', password: '123456gG' },
+  { key: '2', email: 'admin@gmail.com', interests: ['art', 'music'], learnedLanguage: 'fr', nativeLanguage: 'ru', levelLanguage: 'A1', password: '123456gG' },
 ];
 
 export function userNameList() {
-  for (let key in usersList) {
-    console.log(`${key}: ${usersList[key].label}`);
-  }
+  usersList.forEach((user, index) => {
+    console.log(`${index}: ${user.label}`);
+  });
 }

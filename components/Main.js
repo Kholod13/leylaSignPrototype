@@ -2,16 +2,15 @@ import { StyleSheet, Text, View, Modal, TouchableOpacity, Animated, Image } from
 import { GenStyles } from '../styles/style';
 import { useNavigation } from '@react-navigation/native';
 import NavigationMenu from './NavigationMenu';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { translateWord } from './api/translateWord';
 import { ScrollView } from 'react-native-gesture-handler';
 import { FlatList, Dimensions } from 'react-native';
 import { useWindowDimensions } from 'react-native';
 import { userNameList } from './Data';
+import { useUsers } from '../components/UserContext';
 
 const {width} = Dimensions.get('window');
-
-userNameList(); // Initialize user names
 
 const paginateText = (text, firstPageLimit = 900, otherPagesLimit = 1200) => {
   const paragraphs = text.split('\n').map(p => p.trim()).filter(p => p.length > 0);
@@ -43,7 +42,12 @@ const paginateText = (text, firstPageLimit = 900, otherPagesLimit = 1200) => {
 };
 
 export default function Main({navigation}) {
-  
+  const {usersList} = useUsers();
+
+  useEffect(() => {
+    console.log('Users list:', usersList);
+  }, []);
+
   const title = 'The Loyal Companion';
   //const fullText = ' A dog is a loyal and intelligent animal that has been a companion to humans for thousands of years. Dogs come in many breeds, each with unique characteristics, sizes, and temperaments. Some dogs are small and energetic, while others are large and calm. They are often trained to perform various tasks, such as guarding homes, assisting people with disabilities, or working in law enforcement.\nDogs communicate through barking, body language, and facial expressions. They are social animals that form strong bonds with their owners and families. Proper care, including regular exercise, a balanced diet, and veterinary check-ups, is essential for keeping a dog healthy and happy.\nMany people enjoy having dogs as pets because of their affectionate nature and loyal companionship. Dogs playful are known for forming strong bonds with their owners, often providing emotional support and a sense of security. Their playful\nloyal companionship. Dogs are known for forming strong bonds with their owners, often providing emotional support and a sense of security. Their playful behavior and eagerness to please make them excellent family pets, and many people appreciate the daily routines and exercise that come with dog ownership. Additionally, dogs can be trained for various tasks, from simple tricks to important roles like guiding the visually impaired or working with law enforcement.';
   const fullText = 'Once upon a time in a quiet village nestled between rolling hills and whispering forests, there lived a young boy named Eliot. He was known for his boundless curiosity and an imagination that often took him to places far beyond the village boundaries.\nEvery morning, Eliot would wander into the woods, not out of mischief but in search of adventure. The forest was his playground, and each rustling leaf or fluttering bird sparked a story in his mind. He believed the old oak tree near the river could talk, and the fox that crossed his path every Thursday was a secret guardian of the woods.\nOne day, Eliot discovered a strange book buried beneath the roots of the talking oak. The pages were covered in symbols, maps, and drawings of creatures he had only imagined. As he flipped through the pages, the sky darkened, and a wind swirled around him. The forest hushed as if waiting.\nEliot took the book home and hid it beneath his bed. That night, he dreamt of glowing pathways, mountains that breathed, and stars that hummed melodies. When he awoke, the symbols from the book were glowing faintly in the dark.\nDetermined to uncover its secrets, Eliot spent his days deciphering the strange language. He discovered that the book was a gateway—a guide to a hidden world existing in tandem with his own. It spoke of “The Between,” a place where time paused and reality twisted like water.\nWeeks passed, and Eliot grew more distant from his peers. While others played, he studied. While others laughed, he listened to the whispers from the book. It was preparing him for a journey that only he could take.\nOne evening, under a moonlit sky, he traced a symbol from the book onto the ground with salt and river stones. As he chanted the words written on page thirty-three, a portal opened like a shimmering mirror in the air. Without hesitation, he stepped through.\nThe Between was unlike anything he’d ever known. Gravity shifted, colors danced, and thoughts echoed aloud. He encountered sentient shadows, floating libraries, and a creature made of mist who called itself Tether. Tether became his guide, helping him understand that he was a “Walker,” one of few born with the gift to travel across realms.\nThrough trials of fire, wind, and silence, Eliot learned to harness parts of himself he never knew existed—bravery, wisdom, compassion, and sacrifice. He helped mend broken pathways and calm restless spirits. He restored balance to places forgotten by time.\n\
