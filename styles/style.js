@@ -29,6 +29,12 @@ export const GenStyles = StyleSheet.create({
     flexDirection: 'row',
     
   },
+  containerHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center', 
+    width: '100%',
+  },
   // background circles
   circle1: {
     width: 293,
@@ -408,5 +414,12 @@ export const GenStyles = StyleSheet.create({
     height: 200,
     borderRadius: 16,
     margin: 20,
+  },
+  //add word to folder
+  wordBlock: {
+    padding: 20,
+    width: '100%',
+    alignItems: 'flex-start',
+    marginBottom: 10,
   },
 });

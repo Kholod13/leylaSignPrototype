@@ -156,7 +156,7 @@ const formatText = (text) => {
               <View style={styles.modalContent}>
                 <View style={styles.buttonAdd}>
                   <TouchableOpacity onPress={() => {
-                    navigation.navigate('AddWordToFolder', {selectedWord});
+                    navigation.navigate('AddWordToFolder', {selectedWord, translation});
                     setModalVisible(false);
                   }}>
                     <Image source={require('../assets/icons/PlusCircle.png')} />
