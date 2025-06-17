@@ -4,7 +4,8 @@ import { GenStyles } from '../../styles/style';
 
 export default function AddWordToFolder({navigation, route}) {
     const {selectedWord, translation} = route.params || {};
-    const [modalVisible, setModalVisible] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
+    const [editedTranslation, setEditedTranslation] = useState(translation);
     const [text, setText] = useState('');
   return (
     <View style={[styles.container, {justifyContent: 'flex-start', marginTop: 50}]}>
@@ -16,31 +17,38 @@ export default function AddWordToFolder({navigation, route}) {
           <Text style={styles.text}>Add to folder</Text>
         </View>
       </View>
-      {/* Modal window for edit translation */}
-      <Modal
-            visible={modalVisible}
-            transparent={true}
-            animationType="fade"
-            onRequestClose={() => setModalVisible(false)}
-      >
-
-      </Modal>
       <View style={GenStyles.wordBlock}>
         <Text style={[GenStyles.title, {textTransform: 'capitalize', width: '100%'}]}>{selectedWord}</Text>
         <Text style={styles.underText}>Translation</Text>
-        <View style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-        }}>
-          <Text style={{
-          fontFamily: 'inter-regular',
-          fontSize: 18,
-          textTransform: 'capitalize',
-          marginTop: 10,
-        }}>{translation}</Text>
-          <TouchableOpacity style={{marginLeft: 10}} onPress={() => navigation.navigate('EditWord', {selectedWord, translation})}>
-            <Image source={require('../../assets/icons/NotePencil.png')}></Image>
-          </TouchableOpacity>
+        <View style={{ flexDirection: 'row', alignItems: 'center', width: '100%' }}>
+          {isEditing ? (
+            <View style={styles.inputWrapper}>
+              <TextInput
+                style={styles.inputInside}
+                value={editedTranslation}
+                onChangeText={setEditedTranslation}
+                autoFocus
+              />
+              <TouchableOpacity
+                style={styles.inputButton}
+                onPress={() => setIsEditing(false)}
+              >
+                <Image source={require('../../assets/icons/CheckCircleGray.png')} />
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <>
+              <Text style={{
+                fontFamily: 'inter-regular',
+                fontSize: 18,
+                textTransform: 'capitalize',
+                marginTop: 10,
+              }}>{editedTranslation}</Text>
+              <TouchableOpacity style={{ marginLeft: 10 }} onPress={() => setIsEditing(true)}>
+                <Image source={require('../../assets/icons/NotePencil.png')} />
+              </TouchableOpacity>
+            </>
+          )}
         </View>
         <Text style={[styles.underText, {marginTop: 20}]}>Hint (optional)</Text>
         <TextInput
@@ -52,6 +60,9 @@ export default function AddWordToFolder({navigation, route}) {
           onChangeText={setText}
           textAlignVertical="top"
         />
+        {text.length > 120 && (
+          <Text style={{color: '#EC5050', paddingTop: 5}}>Maximum 120 characters allowed</Text>
+        )}
       </View>
       <View style={{
           borderTopWidth: 1,
@@ -102,4 +113,23 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: 10,
   },
+  inputWrapper: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  backgroundColor: '#DCD7D3',
+  borderRadius: 12,
+  paddingHorizontal: 16,
+  marginTop: 10,
+  position: 'relative',
+  width: '100%',
+},
+inputButton: {
+  marginLeft: 8,
+},
+inputInside: {
+  flex: 1,
+  fontSize: 16,
+  paddingVertical: 16,
+  fontFamily: 'inter-regular',
+},
 });
