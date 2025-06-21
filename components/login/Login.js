@@ -7,6 +7,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AuthContext } from '../../AuthContext';
 import { usersList } from '../Data'; // Assuming userList is exported from Data.js
+import { useUsers } from '../UserContext';
 
 const users = usersList;
 
@@ -26,6 +27,7 @@ export default function Login({ navigation }) {
   const isMailValid = mail.trim().length > 0;
   const isPasswordValid = password.trim().length > 0;
   const userKey = users.find(user => user.email === mail)?.key;
+  const { setCurrentUserEmail } = useUsers();
 
   function checkMail() {
   for (let i = 0; i < users.length; i++) {
@@ -131,9 +133,11 @@ export default function Login({ navigation }) {
              style={[
                 checkMail() && checkPassword() ? GenStyles.buttonLogin : GenStyles.buttonDisabled,
               ]}
-              onPress={login}
+              onPress ={() => {
+                login();
+                setCurrentUserEmail(mail);
+              }}
               disabled={!(checkMail() && checkPassword())}
-
         >
           <Text style={GenStyles.buttonLoginText}>Log In</Text>
         </TouchableOpacity>

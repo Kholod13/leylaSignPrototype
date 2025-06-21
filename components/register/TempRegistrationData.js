@@ -62,7 +62,8 @@ export function pushTempUserData() {
         nativeLanguage: tempUserData.nativeLanguage,
         learnedLanguage: tempUserData.learnedLanguage,
         levelLanguage: tempUserData.levelLanguage,
-        interests: tempUserData.interests
+        interests: tempUserData.interests,
+        folders: [], // Initialize with an empty array for folders
     });
 
 }   

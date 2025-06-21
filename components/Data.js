@@ -12,8 +12,31 @@ export const mailsList = [
 ];
 
 export const usersList = [ 
-  { key: '1', email: 'leyla@gmail.com', interests: ['art', 'music'], learnedLanguage: 'fr', nativeLanguage: 'ru', levelLanguage: 'A1', password: '123456gG' },
-  { key: '2', email: 'admin@gmail.com', interests: ['art', 'music'], learnedLanguage: 'fr', nativeLanguage: 'ru', levelLanguage: 'A1', password: '123456gG' },
+  { key: '1', 
+    email: 'leyla@gmail.com', 
+    interests: ['art', 'music'], 
+    learnedLanguage: 'fr', 
+    nativeLanguage: 'ru', 
+    levelLanguage: 'A1', 
+    password: '123456gG',
+    folders: [ 
+      { id: 'f1', name: 'Favorites' },
+      { id: 'f2', name: 'Grammar' },
+    ]
+  },
+  { 
+    key: '2',
+    email: 'admin@gmail.com', 
+    interests: ['art', 'music'], 
+    learnedLanguage: 'fr', 
+    nativeLanguage: 'ru', 
+    levelLanguage: 'A1', 
+    password: '123456gG',
+    folders: [ // ⬅️ нове поле
+      { id: 'f1', name: 'Favorites' },
+      { id: 'f2', name: 'Grammar' },
+    ]
+  },
 ];
 
 export function userNameList() {

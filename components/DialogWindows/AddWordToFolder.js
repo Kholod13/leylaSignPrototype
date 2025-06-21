@@ -1,12 +1,28 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, Modal, TextInput } from 'react-native';
 import { GenStyles } from '../../styles/style';
+import { useUsers } from '../UserContext';
+import { tempUserData } from '../register/TempRegistrationData';
 
 export default function AddWordToFolder({navigation, route}) {
     const {selectedWord, translation} = route.params || {};
     const [isEditing, setIsEditing] = useState(false);
     const [editedTranslation, setEditedTranslation] = useState(translation);
     const [text, setText] = useState('');
+    const [modalVisible, setModalVisible] = useState(false);
+    const [newFolderName, setNewFolderName] = useState('');
+
+    const { usersList, setUsersList, currentUserEmail, addFolderToUser } = useUsers();
+    const currentUser = usersList.find(user => user.email === currentUserEmail);
+
+
+    const getUserFolders = (email) => {
+    const user = usersList.find(u => u.email === email);
+      return user?.folders || [];
+    };
+
+    const folders = currentUser?.folders || [];
+
   return (
     <View style={[styles.container, {justifyContent: 'flex-start', marginTop: 50}]}>
       <View style={GenStyles.containerHeader}>
@@ -79,13 +95,60 @@ export default function AddWordToFolder({navigation, route}) {
             }}
           >
             <Text style={GenStyles.title}>Choose folder</Text>
-            <TouchableOpacity>
+            <Modal visible={modalVisible} transparent animationType="slide">
+              <View style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: 'rgba(0,0,0,0.5)'
+              }}>
+                <View style={{
+                  backgroundColor: '#fff',
+                  padding: 20,
+                  borderRadius: 12,
+                  width: '80%',
+                  alignItems: 'center',
+                }}>
+                  <Text style={{ fontFamily: 'inter-bold', fontSize: 18 }}>New Folder</Text>
+                  <TextInput
+                    placeholder="Folder name"
+                    value={newFolderName}
+                    onChangeText={setNewFolderName}
+                    style={styles.input}
+                  />
+                  <View style={{ flexDirection: 'row', marginTop: 20 }}>
+                    <TouchableOpacity onPress={() => setModalVisible(false)} style={{ marginRight: 10 }}>
+                      <Text>Cancel</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => {
+                      addFolderToUser(currentUser.email, { name: newFolderName, words: [] });
+                      setModalVisible(false);
+                      setNewFolderName('');
+                    }}>
+                      <Text style={{ fontWeight: 'bold' }}>Create</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </View>
+            </Modal>
+
+            <TouchableOpacity onPress={() => setModalVisible(true)}>
               <Image source={require('../../assets/icons/Plus.png')} style={{width: 25, height: 25}}/>
             </TouchableOpacity>
           </View>
           {/* List folders */}
           <View>
-
+            {folders.length > 0 ? (
+              folders.map((folder, index) => (
+                <View key={index} style={{ paddingVertical: 8 }}>
+                  <Text style={{ fontFamily: 'inter-regular', fontSize: 16 }}>{folder.name}</Text>
+                </View>
+              ))
+            ) : (
+              <Text style={{ fontFamily: 'inter-regular', fontSize: 14, color: '#918D8A' }}>
+                No folders yet
+              </Text>
+            )}
           </View>
         </View>
     </View>

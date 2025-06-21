@@ -13,7 +13,7 @@ import { tempUserData } from './TempRegistrationData';
 const mails = mailsList;
 
 export default function RegistrationStep6({ navigation }) {
-  const { addUser } = useUsers();
+  const { addUser, setCurrentUserEmail } = useUsers();
   const { setProgress } = useContext(ProgressContext);
   const [emailFocused, setEmailFocused] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
@@ -175,6 +175,7 @@ export default function RegistrationStep6({ navigation }) {
                 setEmailTemp(mail);
                 setPasswordTemp(password);
                 pushTempUserData();
+                setCurrentUserEmail(mail);
                 addUser({
                   email: mail,
                   password: password,
@@ -182,6 +183,7 @@ export default function RegistrationStep6({ navigation }) {
                   learnedLanguage: tempUserData.learnedLanguage,
                   levelLanguage: tempUserData.levelLanguage,
                   interests: tempUserData.interests,
+                  folders: [],
                 });
                 login();
               }}
