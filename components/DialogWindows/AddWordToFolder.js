@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, Modal, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, Modal, TextInput, ScrollView } from 'react-native';
 import { GenStyles } from '../../styles/style';
 import { useUsers } from '../UserContext';
 import { tempUserData } from '../register/TempRegistrationData';
@@ -67,16 +67,19 @@ export default function AddWordToFolder({navigation, route}) {
           )}
         </View>
         <Text style={[styles.underText, {marginTop: 20}]}>Hint (optional)</Text>
+        
         <TextInput
           style={styles.input}
-          multiline={true}
           numberOfLines={4}
           placeholder="Enter a hint"
           value={text}
           onChangeText={setText}
           textAlignVertical="top"
+          multiline
+          maxLength={120}
+          blurOnSubmit={true}
         />
-        {text.length > 120 && (
+        {text.length >= 120 && (
           <Text style={{color: '#EC5050', paddingTop: 5}}>Maximum 120 characters allowed</Text>
         )}
       </View>
@@ -106,41 +109,57 @@ export default function AddWordToFolder({navigation, route}) {
                   backgroundColor: '#fff',
                   padding: 20,
                   borderRadius: 12,
-                  width: '80%',
+                  width: '100%',
+                  height: '100%',
                   alignItems: 'center',
+                  paddingTop: 50,
                 }}>
-                  <Text style={{ fontFamily: 'inter-bold', fontSize: 18 }}>New Folder</Text>
-                  <TextInput
-                    placeholder="Folder name"
-                    value={newFolderName}
-                    onChangeText={setNewFolderName}
-                    style={styles.input}
-                  />
-                  <View style={{ flexDirection: 'row', marginTop: 20 }}>
+                  <View style={GenStyles.containerHeader}>
                     <TouchableOpacity onPress={() => setModalVisible(false)} style={{ marginRight: 10 }}>
-                      <Text>Cancel</Text>
+                      <Image source={require('../../assets/icons/ArrowLeft.png')} />
                     </TouchableOpacity>
+                    <Text style={{ fontFamily: 'inter-bold', fontSize: 18 }}>New Folder</Text>
                     <TouchableOpacity onPress={() => {
                       addFolderToUser(currentUser.email, { name: newFolderName, words: [] });
                       setModalVisible(false);
                       setNewFolderName('');
+                      navigation.navigate('Main');
                     }}>
-                      <Text style={{ fontWeight: 'bold' }}>Create</Text>
+                      <Text style={{ fontWeight: 'bold', fontSize: 18, color: '#0388F5' }}>Save</Text>
                     </TouchableOpacity>
                   </View>
+                  <View style={{width: '100%', flex: 1}}>
+                    <Text style={[styles.underText, {marginTop: 30, textAlign: 'left'}]}>Folder name</Text>
+                    <TextInput
+                      placeholder="Folder name"
+                      value={newFolderName}
+                      onChangeText={setNewFolderName}
+                      style={styles.input}
+                    />
+                    </View>
                 </View>
               </View>
             </Modal>
-
             <TouchableOpacity onPress={() => setModalVisible(true)}>
               <Image source={require('../../assets/icons/Plus.png')} style={{width: 25, height: 25}}/>
             </TouchableOpacity>
           </View>
           {/* List folders */}
-          <View>
+          <ScrollView showsVerticalScrollIndicator={false} style={{ marginTop: -20, height: '65%' }}>
             {folders.length > 0 ? (
               folders.map((folder, index) => (
-                <View key={index} style={{ paddingVertical: 8 }}>
+                <View key={index} 
+                style={{ 
+                  flexDirection: 'row', 
+                  alignItems: 'center', 
+                  backgroundColor: '#ffffff',
+                  borderRadius: 16,
+                  borderColor: '#E5E0DC',
+                  borderWidth: 1,
+                  padding: 16,
+                  marginVertical: 4,
+                }}>
+                  <Image source={require('../../assets/icons/FolderGray.png')} style={{marginRight: 16}} />
                   <Text style={{ fontFamily: 'inter-regular', fontSize: 16 }}>{folder.name}</Text>
                 </View>
               ))
@@ -149,7 +168,7 @@ export default function AddWordToFolder({navigation, route}) {
                 No folders yet
               </Text>
             )}
-          </View>
+          </ScrollView>
         </View>
     </View>
   );

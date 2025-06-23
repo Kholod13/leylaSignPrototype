@@ -13,9 +13,12 @@ const [currentUserEmail, setCurrentUserEmail] = useState(null);
     nativeLanguage: 'ru', 
     levelLanguage: 'A1', 
     password: '123456gG',
-    folders: [ 
-      { id: 'f1', name: 'Favorites' },
-      { id: 'f2', name: 'Grammar' },
+    folders: [ // ⬅️ нове поле
+      { id: 'f1', name: 'Favorites', words: []},
+      { id: 'f2', name: 'Grammar', words: [
+        { word: 'Hello', translation: 'Привет', hint: 'A common greeting in French' },
+        { word: 'Bye', translation: 'Пака', hint: 'A common farewell' },
+      ] },
     ]
   },
   { 
@@ -27,8 +30,11 @@ const [currentUserEmail, setCurrentUserEmail] = useState(null);
     levelLanguage: 'A1', 
     password: '123456gG',
     folders: [ // ⬅️ нове поле
-      { id: 'f1', name: 'Favorites' },
-      { id: 'f2', name: 'Grammar' },
+      { id: 'f1', name: 'Favorites', words: []},
+      { id: 'f2', name: 'Grammar', words: [
+        { word: 'Hello', translation: 'Привет', hint: 'A common greeting in French' },
+        { word: 'Bye', translation: 'Пака', hint: 'A common farewell' },
+      ] },
     ]
   },
   ]);
@@ -56,6 +62,10 @@ const addFolderToUser = (email, newFolder) => {
       })
     );
   };
+
+const addWordToFolder = (email, folderId, word) => {
+
+};
 
   return (
     <UserContext.Provider value={{ usersList, setUsersList, addUser, addFolderToUser, currentUserEmail, setCurrentUserEmail }}>
