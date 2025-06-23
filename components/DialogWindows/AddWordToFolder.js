@@ -12,9 +12,19 @@ export default function AddWordToFolder({navigation, route}) {
     const [modalVisible, setModalVisible] = useState(false);
     const [newFolderName, setNewFolderName] = useState('');
 
-    const { usersList, setUsersList, currentUserEmail, addFolderToUser } = useUsers();
+    const { usersList, setUsersList, currentUserEmail, addFolderToUser, addWordToFolder } = useUsers();
     const currentUser = usersList.find(user => user.email === currentUserEmail);
 
+    const handleAddWord = (id, word, translation, hint) => {
+      const folderId = id;
+      const newWord = {
+        word: word,
+        translation: translation,
+        hint: hint,
+      };
+
+      addWordToFolder(currentUserEmail, folderId, newWord);
+    }
 
     const getUserFolders = (email) => {
     const user = usersList.find(u => u.email === email);
@@ -119,12 +129,22 @@ export default function AddWordToFolder({navigation, route}) {
                       <Image source={require('../../assets/icons/ArrowLeft.png')} />
                     </TouchableOpacity>
                     <Text style={{ fontFamily: 'inter-bold', fontSize: 18 }}>New Folder</Text>
-                    <TouchableOpacity onPress={() => {
-                      addFolderToUser(currentUser.email, { name: newFolderName, words: [] });
-                      setModalVisible(false);
-                      setNewFolderName('');
-                      navigation.navigate('Main');
-                    }}>
+                    <TouchableOpacity
+                      onPress={() => {
+                        const newId = `f${Date.now()}`; // генерируем уникальный ID
+                        const newFolder = { id: newId, name: newFolderName, words: [] };
+                        addFolderToUser(currentUser.email, newFolder);
+                        // Сначала закроем модалку и сбросим состояние
+                        setModalVisible(false);
+                        setNewFolderName('');
+
+                        // Добавим слово в эту новую папку
+                        handleAddWord(newId, selectedWord, editedTranslation, text);
+
+                        // Перейдём на главный экран
+                        navigation.navigate('Main');
+                      }}
+                    >
                       <Text style={{ fontWeight: 'bold', fontSize: 18, color: '#0388F5' }}>Save</Text>
                     </TouchableOpacity>
                   </View>

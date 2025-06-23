@@ -64,11 +64,37 @@ const addFolderToUser = (email, newFolder) => {
   };
 
 const addWordToFolder = (email, folderId, word) => {
-
+  setUsersList((prevUsers) =>
+    prevUsers.map((user) => {
+      if (user.email === email) {
+        return {
+          ...user,
+          folders: user.folders.map((folder) => {
+            if (folder.id === folderId) {
+              return {
+                ...folder,
+                words: [...(folder.words || []), word],
+              };
+            }
+            return folder;
+          }),
+        };
+      }
+      return user;
+    })
+  );
 };
 
   return (
-    <UserContext.Provider value={{ usersList, setUsersList, addUser, addFolderToUser, currentUserEmail, setCurrentUserEmail }}>
+    <UserContext.Provider value={{
+      usersList,
+      setUsersList,
+      addUser,
+      addFolderToUser,
+      currentUserEmail,
+      setCurrentUserEmail,
+      addWordToFolder,
+      }}>
       {children}
     </UserContext.Provider>
 
