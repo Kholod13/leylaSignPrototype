@@ -11,6 +11,7 @@ export default function AddWordToFolder({navigation, route}) {
     const [text, setText] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
     const [newFolderName, setNewFolderName] = useState('');
+    const [selectedFolder, setSelectedFolder] = useState(null);
 
     const { usersList, setUsersList, currentUserEmail, addFolderToUser, addWordToFolder } = useUsers();
     const currentUser = usersList.find(user => user.email === currentUserEmail);
@@ -165,30 +166,35 @@ export default function AddWordToFolder({navigation, route}) {
             </TouchableOpacity>
           </View>
           {/* List folders */}
-          <ScrollView showsVerticalScrollIndicator={false} style={{ marginTop: -20, height: '65%' }}>
-            {folders.length > 0 ? (
-              folders.map((folder, index) => (
-                <View key={index} 
-                style={{ 
-                  flexDirection: 'row', 
-                  alignItems: 'center', 
-                  backgroundColor: '#ffffff',
-                  borderRadius: 16,
-                  borderColor: '#E5E0DC',
-                  borderWidth: 1,
-                  padding: 16,
-                  marginVertical: 4,
-                }}>
-                  <Image source={require('../../assets/icons/FolderGray.png')} style={{marginRight: 16}} />
-                  <Text style={{ fontFamily: 'inter-regular', fontSize: 16 }}>{folder.name}</Text>
-                </View>
-              ))
-            ) : (
-              <Text style={{ fontFamily: 'inter-regular', fontSize: 14, color: '#918D8A' }}>
-                No folders yet
-              </Text>
-            )}
-          </ScrollView>
+              <ScrollView showsVerticalScrollIndicator={false} style={{ marginTop: -20, height: '65%' }}>
+                {folders.length > 0 ? (
+                  folders.map((folder, index) => (
+                    <TouchableOpacity key={index} 
+                      onPress={() => {
+                        setSelectedFolder(folder);
+                        handleAddWord(folder.id, selectedWord, editedTranslation, text);
+                        navigation.navigate('Main');
+                      }}
+                      style={{ 
+                        flexDirection: 'row', 
+                        alignItems: 'center', 
+                        backgroundColor: '#ffffff',
+                        borderRadius: 16,
+                        borderColor: '#E5E0DC',
+                        borderWidth: 1,
+                        padding: 16,
+                        marginVertical: 4,
+                      }}>
+                      <Image source={require('../../assets/icons/FolderGray.png')} style={{marginRight: 16}} />
+                      <Text style={{ fontFamily: 'inter-regular', fontSize: 16 }}>{folder.name}</Text>
+                    </TouchableOpacity>
+                    ))
+                      ) : (
+                        <Text style={{ fontFamily: 'inter-regular', fontSize: 14, color: '#918D8A' }}>
+                          No folders yet
+                        </Text>
+                      )}
+              </ScrollView>
         </View>
     </View>
   );
