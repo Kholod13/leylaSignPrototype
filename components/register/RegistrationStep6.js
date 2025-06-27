@@ -37,7 +37,7 @@ export default function RegistrationStep6({ navigation }) {
   return false;
 }
 
-    function getPasswordErrors(password) {
+function getPasswordErrors(password) {
   const errors = [];
 
   if (password.length < 8 && !/[A-Z]/.test(password) || /\s/.test(password) && password.length < 8

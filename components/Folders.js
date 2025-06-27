@@ -31,16 +31,18 @@ export default function Folders() {
                       <TouchableOpacity onPress={() => setModalVisible(false)}>
                         <Image source={require('../assets/icons/ArrowLeft.png')} />
                       </TouchableOpacity>
-                      <Text style={GenStyles.title}>{selectedFolder?.name}</Text>
-                      <Text>Test page</Text>
+                      <Text style={[GenStyles.title, {textAlign: 'center'}]}>{selectedFolder?.name}</Text>
+                      <View style={{ width: 40 }}></View>
                   </View>
-                  <ScrollView contentContainerStyle={{ padding: 20 }}>
+                  <ScrollView contentContainerStyle={{ width: '100%' }}>
                     {selectedFolder?.words?.length > 0 ? (
                       selectedFolder.words.map((item, index) => (
-                        <View key={index} style={{ marginBottom: 16 }}>
-                          <Text style={{ fontWeight: 'bold', fontSize: 16 }}>{item.word}</Text>
-                          <Text style={{ fontSize: 14, color: '#555' }}>Translation: {item.translation}</Text>
-                          <Text style={{ fontSize: 14, fontStyle: 'italic', color: '#888' }}>Hint: {item.hint}</Text>
+                        <View key={index} style={{backgroundColor: '#EBE8E5', padding: 16, borderRadius: 12, width: '85%', marginBottom: 10, flexDirection: 'row', alignItems: 'center', marginHorizontal: 12}}>
+                          <Text style={{fontSize: 18, fontWeight: 'bold', marginRight: 16}}>{index+1}</Text>
+                          <View style={{width: '100%'}}>
+                            <Text style={{ fontWeight: 'bold', fontSize: 18 }}>{item.word} - {item.translation}</Text>
+                            <Text style={{ fontSize: 16, fontStyle: 'italic', color: '#888' }}>{item.hint}</Text>
+                          </View>
                         </View>
                       ))
                     ) : (
