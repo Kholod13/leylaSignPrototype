@@ -5,25 +5,26 @@ import React, { useContext, useEffect, useState } from 'react';
 import { ProgressContext } from '../ProgressContext';
 import { setLearnedLanguage } from './TempRegistrationData';
 
-const languages = [
-  { key: 'en_us', label: 'English (United State)', icon: require('../../assets/icons/USA.png') },
-  { key: 'en_uk', label: 'English (United Kingdom)', icon: require('../../assets/icons/UnitedKingdom.png') },
-  { key: 'de', label: 'German', icon: require('../../assets/icons/Germany.png') },
-  { key: 'fr', label: 'French', icon: require('../../assets/icons/France.png') },
-  { key: 'es', label: 'Spanish', icon: require('../../assets/icons/Spain.png') },
-  { key: 'it', label: 'Italian', icon: require('../../assets/icons/Italy.png') },
-  { key: 'pl', label: 'Polish', icon: require('../../assets/icons/Poland.png') },
-  { key: 'cz', label: 'Czech', icon: require('../../assets/icons/Czech.png') },
-  { key: 'ua', label: 'Ukrainian', icon: require('../../assets/icons/Ukraine.png') },
-  { key: 'ru', label: 'Russian', icon: require('../../assets/icons/Russia.png') },
-];
-
 export default function RegistrationStep2({ navigation }) {
   const { setProgress } = useContext(ProgressContext);
+  const [languages, setLanguages] = useState([]);
   const [selectedLanguage, setSelectedLanguage] = useState(null);
 
   useEffect(() => {
     setProgress(28);
+
+    // Загрузка языков из API
+    const fetchLanguages = async () => {
+      try {
+        const response = await fetch("https://28yah1ied5.execute-api.us-east-1.amazonaws.com/dev/languages");
+        const data = await response.json();
+        setLanguages(data);
+      } catch (error) {
+        console.error("Ошибка загрузки языков:", error);
+      }
+    };
+
+    fetchLanguages();
   }, []);
 
   return (
@@ -35,19 +36,22 @@ export default function RegistrationStep2({ navigation }) {
           <ScrollView showsVerticalScrollIndicator={false}>
             {languages.map((lang) => (
               <TouchableOpacity
-                key={lang.key}
+                key={lang.id}
                 style={[
                   GenStyles.block,
                   styles.radioContainer,
-                  selectedLanguage === lang.key && styles.selectedBlockBorder,
+                  selectedLanguage === lang.id && styles.selectedBlockBorder,
                 ]}
                 onPress={() => {
-                  setSelectedLanguage(lang.key);
-                  setLearnedLanguage(lang.key);
+                  setSelectedLanguage(lang.id);
+                  setLearnedLanguage(lang.id);
                 }}
               >
-                <Image style={GenStyles.IconStyle} source={lang.icon} />
-                <Text style={GenStyles.textBlock}>{lang.label}</Text>
+                <Image
+                  style={GenStyles.IconStyle}
+                  source={require('../../assets/icons/Ukraine.png')} // заглушка
+                />
+                <Text style={GenStyles.textBlock}>{lang.name}</Text>
               </TouchableOpacity>
             ))}
           </ScrollView>
@@ -57,7 +61,7 @@ export default function RegistrationStep2({ navigation }) {
       <View>
         <TouchableOpacity
           style={[
-            selectedLanguage ? GenStyles.buttonLogin : GenStyles.buttonDisabled, 
+            selectedLanguage ? GenStyles.buttonLogin : GenStyles.buttonDisabled,
           ]}
           onPress={() => navigation.navigate('RegistrationStep3')}
           disabled={!selectedLanguage}
