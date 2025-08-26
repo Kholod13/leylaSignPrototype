@@ -3,7 +3,7 @@ import { GenStyles } from '../../styles/style';
 import ProgressBarHeader from '../ProgressBarHeader';
 import React, { useContext, useEffect, useState } from 'react';
 import { ProgressContext } from '../ProgressContext';
-import { setLearnedLanguage } from './TempRegistrationData';
+import { setLearnedLanguage, tempUserData } from './TempRegistrationData';
 
 export default function RegistrationStep2({ navigation }) {
   const { setProgress } = useContext(ProgressContext);
@@ -18,7 +18,10 @@ export default function RegistrationStep2({ navigation }) {
       try {
         const response = await fetch("https://28yah1ied5.execute-api.us-east-1.amazonaws.com/dev/languages");
         const data = await response.json();
-        setLanguages(data);
+
+        const filteredData = data.filter(lang => lang.id !== tempUserData.nativeLanguage); // Фильтрация, исключающая английский язык
+
+        setLanguages(filteredData);
       } catch (error) {
         console.error("Ошибка загрузки языков:", error);
       }
